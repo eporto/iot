@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Enviar Dados</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="home">
+  <ion-item>
+    <ion-label floating> String </ion-label>
+    <ion-input (input) = "data.varString = $event.target.value"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating> Number </ion-label>
+    <ion-input type = "number" (input) = "data.varNum = $event.target.value"></ion-input>
+  </ion-item>
+
+  <button block (click)="enviarDados()">Enviar</button>
+
+  <ion-card>
+    <ion-card-header> Response from server </ion-card-header>
+
+    <ion-card-content>
+      {{res}}
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
