@@ -25,6 +25,7 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {EnvioPage} from '../enviopage/enviopage';
 import {ServerPage} from '../serverpage/serverpage';
+import {BeaconPage} from '../beaconpage/beaconpage';
 
 @Component({
   templateUrl: 'build/pages/tabs/tabs.html'
@@ -38,6 +39,7 @@ export class TabsPage {
   constructor(public navCtrl: NavController) {
     this.enviobtn = EnvioPage;
     this.serverbtn = ServerPage;
+    this.beaconbtn = BeaconPage;
   }
 
   changePage (page:any) {
