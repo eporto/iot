@@ -1,16 +1,19 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Http GET
+      Lista Usuários (Banco)
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="about">
-  <ion-list>
+  <ion-list *ngIf = "data">
+    Users: <br>
 		<ion-item *ngFor="let d of data">
-      <ion-label>String: {{d.varString}}</ion-label>
-      <ion-label>Number: {{d.varNum}}</ion-label>
-		</ion-item>
+      Nome: {{d.name}}, <br>
+      Sexo: {{d.gender}}, <br>
+      Curso: {{d.course}}, <br>
+      Periodo: {{d.period}}
+	  </ion-item>
 	</ion-list>
 </ion-content>

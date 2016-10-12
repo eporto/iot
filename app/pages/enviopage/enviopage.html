@@ -6,22 +6,25 @@
 
 <ion-content padding class="home">
   <ion-item>
-    <ion-label floating> String </ion-label>
+    <ion-label floating> Nome </ion-label>
     <ion-input (input) = "data.varString = $event.target.value"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label floating> Number </ion-label>
-    <ion-input type = "number" (input) = "data.varNum = $event.target.value"></ion-input>
+    <ion-label floating> Senha </ion-label>
+    <ion-input type = "text" (input) = "data.varNum = $event.target.value"></ion-input>
   </ion-item>
 
   <button block (click)="enviarDados()">Enviar</button>
 
-  <ion-card>
+  <ion-card text-wrap>
     <ion-card-header> Response from server </ion-card-header>
-
+    Dados a enviar: <br>
+    <span *ngIf = "data.varString.length > 0">?username={{data.varString}}</span>
+    <span *ngIf = "data.varNum.length > 0">&password={{data.varNum}} </span>
+    <hr>
     <ion-card-content>
-      {{res}}
+      {{r}}
     </ion-card-content>
   </ion-card>
 

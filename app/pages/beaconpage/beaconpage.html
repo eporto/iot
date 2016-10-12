@@ -1,35 +1,76 @@
 <ion-header>
   <ion-navbar>
     <ion-title> Beacons </ion-title>
+    <ion-buttons end>
+      <button *ngIf="gameOn" (click) = "readScroll()">
+        <ion-icon name="book"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content>
-  <ion-label> startMonitoringForRegion: {{regionerror}} </ion-label>
-  <ion-label> didRangeBeaconsInRegion: {{rangebeacons}} </ion-label>
-  <ion-label> didStartMonitoringForRegion: {{monitorbeacons}} </ion-label>
-  <ion-label> didEnterRegion: {{enterregionbeacons}} </ion-label>
+<ion-content text-wrap>
+  <!-- Inicio -->
+  <ion-item *ngIf = "!gameOn">
+    Nome: USER_NAME <br>
+    Sexo: USER_GENDER <br>
+    Curso: USER_COURSE <br>
+    <hr>
+    Você tem uma luva em sua mão, onde ela tem espaço para 4 coisas <i>(Conhece Thanos?)</i> <br>
+    O objetivo é encontrar essas 4 joias, colocar na luva e.... LIBERTAR O SEU PODER ! <br>
+    Porém eu ouvi dizer que dependendo da ordem em que se colocar as joias, algumas coisas podem acontecer...<br>
+    <i>e com "algumas coisas" eu quero dizer coisas ruins </i> <br>
+    E agora, qual a ordem?
+    <hr>
+    <button *ngIf = "!gameOn" block (click) = "startGame()"> Start Game</button>
+  </ion-item>
+
+
+  <div id='game' *ngIf = "gameOn">
+    <p><i> {{beaconFoundText}} </i> </p> <br>
+    <button class="btnGem button-dark" *ngIf = "beaconInRange == FIRE_GEM"(click)="addGemToGlove(FIRE_GEM)" [disabled] = "checkDisabledBeacon(FIRE_GEM)" large>Ativar</button>
+    <button class="btnGem button-dark" *ngIf = "beaconInRange == EARTH_GEM"(click)="addGemToGlove(EARTH_GEM)" [disabled] = "checkDisabledBeacon(EARTH_GEM)" large>Ativar</button>
+    <button class="btnGem button-dark" *ngIf = "beaconInRange == WIND_GEM" (click)="addGemToGlove(WIND_GEM)" [disabled] = "checkDisabledBeacon(WIND_GEM)" large>Ativar</button>
+    <button class="btnGem button-dark" *ngIf = "beaconInRange == WATER_GEM"  (click)="addGemToGlove(WATER_GEM)" [disabled] = "checkDisabledBeacon(WATER_GEM)" large>Ativar</button>
+  </div>
+
   <br>
-  <ion-label> Erro: {{err}} </ion-label>
-  <ion-label> Data: {{beacon}} </ion-label>
-  <br>
-  <ion-label> DEBBUG: {{debug}} </ion-label><br>
-<!--  <button block (click)='locate()'> Localizar </button>
-  <ion-list>
-		<ion-item *ngFor="let r of rangebeacons">
-      <ion-label>{{r}}</ion-label>
-    </ion-item>
+  <ion-item *ngIf = "gameOn" >
+    {{gemText}}
+  </ion-item>
 
-    <ion-item *ngFor="let m of monitorbeacons">
-      <ion-label>{{m}}</ion-label>
+  <ion-list *ngIf="gameOn">
+    <ion-item  *ngFor = "let b of beacons">
+      Beacon: {{b.minor}}
+      tx: {{b.tx}}
+      rssi: {{b.rssi}}
+      accuracy: {{b.accuracy}}
     </ion-item>
+  </ion-list>
 
-    <ion-item *ngFor="let e of enterregionbeacons">
-      <ion-label>{{e}}</ion-label>
-    </ion-item>
+  Error: {{err}}
 
-    <ion-item *ngFor="let err of regionerror">
-      <ion-label>{{err}}</ion-label>
-    </ion-item>
-	</ion-list>-->
+<!-- Não deu certo rs
+  <div *ngIf = "false" class="radar">
+    <div class="pointer"></div>
+    <div class="shadow"></div>
+  </div>
+-->
+  <ion-footer *ngIf = "gameOn">
+    <div id="element-container">
+      <div #slot1 class="gem"></div>
+      <div #slot2 class="gem"></div>
+      <div #slot3 class="gem"></div>
+      <div #slot4 class="gem"></div>
+    </div>
+    <button #unleash block class="button-dark" (click) = "unleashThePower()" [disabled] = "!(currentSlot > ActivateOrder.length)"> UNLEASH THE POWER </button>
+  </ion-footer>
+
 </ion-content>
+<!--
+didRangeBeaconsInRegion SÓ VAI SER CHAMADO quando encontrar PELO MENOS UM BEACON, ou seja
+  processBeacon e setActiveGem dependem de ter um beacon perto.
+
+Precisa de um setInterval para checar se tem beacon na range
+-->

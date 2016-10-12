@@ -12,7 +12,15 @@
 </ion-header>
 
 <ion-content>
-  <button block (click)='changePage(enviobtn)'> Testar Envio de Dados </button>
-  <button block (click)='changePage(serverbtn)'> Testar Servidor </button>
+  <!--<button block (click)='changePage(enviobtn)'> Testar Envio de Dados </button>
+  <button block (click)='changePage(serverbtn)'> Testar Servidor </button>-->
   <button block (click)='changePage(beaconbtn)'> Testar Beacons </button>
+  <button block (click)='changePage(serverbtn)' color='danger'> Lista de Usuários (Teste) </button>
+  <br><br>
+  <ion-list>
+    <ion-item>
+      Logado como: {{userData.name}} <br>
+      Token: {{userData.token}}
+    </ion-item>
+  </ion-list>
 </ion-content>

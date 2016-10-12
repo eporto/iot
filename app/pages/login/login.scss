@@ -1,0 +1,15 @@
+page-login .logo {
+  padding: 20px 0;
+  min-height: 200px;
+  text-align: center;
+}
+
+page-login .logo img {
+  max-width: 150px;
+}
+
+#login-error {
+  border: 1px solid;
+  color: red;
+  text-align: center;
+}
