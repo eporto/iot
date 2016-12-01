@@ -1,18 +1,121 @@
-.camera-test {
+/*.camera-test {
 
-}
+}*/
 
 html, body, ion-content, ion-page, .nav-decor {
   background-color: transparent !important;
 }
 
+.text {
+  color:white;
+}
+.alertMessages {
+  color:orange;
+  border: 1px solid orange;
+
+}
 #btn {
+
+  width: 50px;
+  height:50px;
+  /*background-image: url("/images/ghost.png");
+  background-repeat: no-repeat;*/
+  
+  border: 1px solid;
+  border-radius: 50%;
+  background-color: black;
+  text-align: center;
+  line-height: 50px;
+  color: orange;
+  
+
+  position: relative;
+  z-index: 99;
+  
+}
+
+#btn-capturar {
   border: 1px solid;
   border-radius: 50%;
   width: 50px;
   height:50px;
   background-color: black;
-  text-align: center;
-  line-height: 50px;
-  color:red;
+ /* text-align: center;
+  line-height: 40px;*/
+  color:#87CEFA;
+  z-index: 100;
+
+  position: absolute;
+  left:45%;
+  bottom:100px;
+  //margin: 0 auto;
+  //top:50%;
+  
+}
+
+/* GAUGE */
+.meter {
+  position:absolute;
+  width:150px;
+  height:20px;
+  border:1px solid #c8c8c8;
+  top:0;
+  left:30%;
+
+  background-image: linear-gradient(bottom, rgb(237,237,237) 0%, rgb(250,250,250) 67%);
+  background-image: -o-linear-gradient(bottom, rgb(237,237,237) 0%, rgb(250,250,250) 67%);
+  background-image: -moz-linear-gradient(bottom, rgb(237,237,237) 0%, rgb(250,250,250) 67%);
+  background-image: -webkit-linear-gradient(bottom, rgb(237,237,237) 0%, rgb(250,250,250) 67%);
+  background-image: -ms-linear-gradient(bottom, rgb(237,237,237) 0%, rgb(250,250,250) 67%);
+}
+
+.meter span {
+  height:100%;
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:10;
+}
+
+.meter .blue {
+background-image: linear-gradient(bottom, rgb(47,138,212) 3%, rgb(59,167,255) 39%);
+background-image: -o-linear-gradient(bottom, rgb(47,138,212) 3%, rgb(59,167,255) 39%);
+background-image: -moz-linear-gradient(bottom, rgb(47,138,212) 3%, rgb(59,167,255) 39%);
+background-image: -webkit-linear-gradient(bottom, rgb(47,138,212) 3%, rgb(59,167,255) 39%);
+background-image: -ms-linear-gradient(bottom, rgb(47,138,212) 3%, rgb(59,167,255) 39%);
+}
+.meter .yellow {
+background-image: linear-gradient(bottom, rgb(207,207,60) 3%, rgb(255,247,94) 39%);
+background-image: -o-linear-gradient(bottom, rgb(207,207,60) 3%, rgb(255,247,94) 39%);
+background-image: -moz-linear-gradient(bottom, rgb(207,207,60) 3%, rgb(255,247,94) 39%);
+background-image: -webkit-linear-gradient(bottom, rgb(207,207,60) 3%, rgb(255,247,94) 39%);
+background-image: -ms-linear-gradient(bottom, rgb(207,207,60) 3%, rgb(255,247,94) 39%);
+}
+.meter .red {
+background-image: linear-gradient(bottom, rgb(184,0,0) 3%, rgb(250,5,5) 39%);
+background-image: -o-linear-gradient(bottom, rgb(184,0,0) 3%, rgb(250,5,5) 39%);
+background-image: -moz-linear-gradient(bottom, rgb(184,0,0) 3%, rgb(250,5,5) 39%);
+background-image: -webkit-linear-gradient(bottom, rgb(184,0,0) 3%, rgb(250,5,5) 39%);
+background-image: -ms-linear-gradient(bottom, rgb(184,0,0) 3%, rgb(250,5,5) 39%);
+}
+.meter .green {
+background-image: linear-gradient(bottom, rgb(54,181,22) 3%, rgb(96,235,26) 39%);
+background-image: -o-linear-gradient(bottom, rgb(54,181,22) 3%, rgb(96,235,26) 39%);
+background-image: -moz-linear-gradient(bottom, rgb(54,181,22) 3%, rgb(96,235,26) 39%);
+background-image: -webkit-linear-gradient(bottom, rgb(54,181,22) 3%, rgb(96,235,26) 39%);
+background-image: -ms-linear-gradient(bottom, rgb(54,181,22) 3%, rgb(96,235,26) 39%);
+}
+
+
+/*-- Transition --*/
+@-webkit-keyframes fill {
+  0%   { width:0; }
+  100% {width:100%;}
+}
+
+.captureEffect {
+  -webkit-animation: fill 3s ease-in-out; /* Safari 4+ */
+  -moz-animation:    fill 3s ease-in-out; /* Fx 5+ */
+  -o-animation:      fill 3s ease-in-out; /* Opera 12+ */
+  animation:         fill 3s linear; /* IE 10+ */
 }

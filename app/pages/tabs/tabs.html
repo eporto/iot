@@ -1,26 +1,66 @@
-<!--<ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="About" tabIcon="information-circle"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>
-</ion-tabs>
--->
-
 <ion-header>
   <ion-navbar>
-    <ion-title> Menu </ion-title>
+    <ion-title>{{userData.name}}</ion-title> 
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <!--<button block (click)='changePage(enviobtn)'> Testar Envio de Dados </button>
-  <button block (click)='changePage(serverbtn)'> Testar Servidor </button>-->
-  <button block (click)='changePage(beaconbtn)'> Testar Beacons </button>
+ <!-- <button block (click)='changePage(beaconbtn)'> Testar Beacons </button>
   <button block (click)='changePage(serverbtn)' color='danger'> Lista de Usuários (Teste) </button>
-  <br><br>
-  <ion-list>
-    <ion-item>
-      Logado como: {{userData.name}} <br>
-      Token: {{userData.token}}
-    </ion-item>
-  </ion-list>
+  <br><br>-->
+  <div id="menu" *ngIf="!inLobby">
+    <button block (click)="onCreateLobby()"> Criar Sala </button>
+    <button block (click)="listLobby()"> Listar Salas </button>
+    <br>
+    
+    <ion-grid>
+      <ion-row center *ngIf="lobby.length">
+        <ion-col width-33>
+          <strong>Sala</strong>
+        </ion-col>
+
+        <ion-col width-33>
+          <strong>Host</strong>
+        </ion-col>
+      
+      </ion-row>
+      <ion-list *ngFor="let l of lobby">
+        <ion-row class="lobby" center>
+          <ion-col width-33>{{l.name}}</ion-col>
+          <ion-col width-33>{{l.player[0].name}}</ion-col>
+          <ion-col width-33><button (click)="joinLobby(l._id)"> Entrar </button></ion-col>
+        </ion-row>
+        <br>
+      </ion-list>
+    </ion-grid>
+  </div>
+
+  <div *ngIf="inLobby">
+    Sala: "{{currentLobby.name}}"
+    <ion-grid>
+     <ion-row>
+        <ion-col width-33>
+            <strong>nick</strong>
+          </ion-col>
+          <ion-col width-33>
+            <strong>curso</strong>
+          </ion-col>
+      </ion-row>
+
+      <ion-list *ngFor="let p of currentLobby.player">
+        <ion-row class="lobby" center>
+          <ion-col width-33>{{p.name}}</ion-col>
+          <ion-col width-33>{{p.course}}</ion-col>
+        </ion-row>
+        <br>
+      </ion-list>
+    </ion-grid>
+
+  <ion-footer>
+    <button *ngIf = "isHost" block (click)="startGame()"> Começar </button>
+    <button block (click)="leaveLobby()"> Sair </button>
+  </ion-footer>
+
+  </div>
+
 </ion-content>

@@ -1,35 +1,30 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {Http} from '@angular/http';
+import {GameService} from '../../providers/game-service/game-service';
+import {TabsPage} from '../tabs/tabs';
 
 @Component({
   templateUrl: 'build/pages/enviopage/enviopage.html'
 })
+
 export class EnvioPage {
-  private r;
-  private data:any = {
-    varString: "",
-    varNum: 0
+  private players:any = null;
+
+  constructor(private navCtrl: NavController, public gameService:GameService) {}
+
+  ionViewLoaded() { 
+    this.gameService.getGameScore((data) => {
+      if(data) {
+        console.log(data);
+       
+        this.players = data;
+      }
+      else 
+        console.log("Error");
+    });
   }
-//  public res:any;
 
-  constructor(private navCtrl: NavController, private http:Http) {
-
+  exit() {
+    this.navCtrl.setRoot(TabsPage);
   }
-
-enviarDados() {
-  //let url:string = "https://iot-project-shido.c9users.io/res/save";
-  let url:string = "https://projectiot-henriquedreyer.c9users.io/users/login";
-  let dataToSend:any = this.data; //Não enviada quando eu transformava em String/Json
-
-  this.http.post(url,dataToSend).subscribe(res => {
-    //fazer algo com o res
-      this.r = res.json();
-      console.log(res);
-    }, error => {
-      this.r = error;
-      console.log("Erro post!");
-  });
-}
-
 }

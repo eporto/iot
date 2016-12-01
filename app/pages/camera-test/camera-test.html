@@ -1,16 +1,19 @@
-<ion-header>
-
-  <ion-navbar>
+  <!--<ion-navbar>
     <ion-title>cameraTest</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
+  </ion-navbar> -->
 
 <ion-content padding>
-  <button block> Hello World </button>
-  <ion-footer>
-    <div id="btn"> Teste </div>
-  </ion-footer>
 
+   <!--<button  (click) = 'spawnGhost()' block [hidden]="false"> Spawn Ghost </button>-->
+    <div *ngIf='alertMessages' class='alertMessages'>{{alertMessages}} </div>
+    <div #ghostTemplate id="btn" [hidden] = 'true' [style.left.px] ='activeGhost.posX' [style.top.px] = "activeGhost.posY">G</div>
+    
+    <div class="meter" *ngIf="isCaptureEffect">
+      <span #captureGauge class="blue" style="width: 0" [class.captureEffect]="isCaptureEffect"></span>
+    </div>
+    
+    <div #captureBtn id='btn-capturar' (click)="endCapture()" (press)="startCapture()"></div>
+    
+  <!--<ion-footer>
+  </ion-footer>-->
 </ion-content>

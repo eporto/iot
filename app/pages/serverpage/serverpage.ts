@@ -1,28 +1,19 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {Http} from '@angular/http';
-import 'rxjs/add/operator/map';
+import {NavController, Platform} from 'ionic-angular';
 
 @Component({
   templateUrl: 'build/pages/serverpage/serverpage.html'
 })
+
 export class ServerPage {
-  private data:any;
+  private w:any;
+  private h:any;
 
-  constructor(private navCtrl: NavController, private http:Http) {
-    this.getData();
+  constructor(private navCtrl: NavController, public platform:Platform) {
+    this.w = this.platform.width();
+    this.h = this.platform.height();
+    console.log(this.w+""+this.h);
   }
 
-  getData () {
-    //let url:string = "http://localhost:8080/app/users";
-    let url:string = 'https://iot-project.herokuapp.com/app/users';
-
-      this.http.get(url).map(res => res.json())
-        .subscribe(data => {
-          this.data = data;
-         // console.log(JSON.stringify(data));
-        }, error => {
-          console.log("Erro Get: "+error);
-      });
-  }
+  
 }

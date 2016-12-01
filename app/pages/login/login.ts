@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController} from 'ionic-angular';
+import { NavController, ModalController, ToastController} from 'ionic-angular';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { TabsPage } from '../tabs/tabs';
-import { RegisterPage } from '../register/register';
-//import { SignupPage } from '../signup/signup';
-//import { UserData } from '../../providers/user-data';
+import { SignupPage } from '../signup/signup';
+import { ServerPage } from '../serverpage/serverpage';
+import { GameService } from '../../providers/game-service/game-service';
 
 
 @Component({
@@ -18,44 +18,41 @@ export class LoginPage {
   }
   private submitted:boolean = false;
   private loginError:boolean = false;
+  private errorMessage:any;
 
-  constructor(public navCtrl: NavController, private http: Http/*, public userData: UserData*/) { }
+  constructor(public navCtrl: NavController, private http: Http, public toastCtrl:ToastController, public gameService:GameService) { }
 
   ionViewDidLoad() {
     //Disparado quando o Ionic View terminar de carregar.
   }
 
   onLogin() {
-    /*this.submitted = true;
-    if (form.valid) {
-     // this.userData.login(this.login.username);
-      this.navCtrl.push(TabsPage);
-    }*/
-    if (this.validate(this.login.username) && this.validate(this.login.password)) {
-      //let url:string = "http://localhost:8080/app/login";
-      let url:string = 'https://iot-project.herokuapp.com/app/login';
-      let dataToSend:any = this.login; //Não enviada quando eu transformava em String/Json
-
-      this.http.post(url,dataToSend).map(res => res.json())
-        .subscribe(data => {
-          if (data.message == "login_failed") this.loginError = true;
-          else if(data.message == "login_complete") this.navCtrl.setRoot(TabsPage,{name:this.login.username, token: data.token});
-          console.log(data);
-        }, error => {
-          console.log("Erro Post: "+error);
-      });
-    } else {
-      console.log("False");
-    }
+    this.loginError = false;
+    this.gameService.userLogin(this.login,(err,user) => {
+      if(user)
+        //this.navCtrl.setRoot(TabsPage,{name:user.name});
+        this.navCtrl.setRoot(TabsPage,{name:user.name});
+      else {
+        this.loginError = true;
+        this.errorMessage = err;
+      }
+    });
     
+   
+
   }
 
   onSignup() {
-    //renomeiar RegisterPage para SignUp page
-    this.navCtrl.push(RegisterPage);
+    this.navCtrl.push(SignupPage);
   }
 
-  validate(credentials):boolean {
-    return credentials.trim().length > 0? true : false;
+  creditsPage() {
+     let toast = this.toastCtrl.create({
+      message: "Criado por Eduardo Porto para disciplina de Tópicos Avançados em Rede de Computadores I",
+       showCloseButton: true,
+       position: 'middle'
+    });
+    toast.present();
   }
+
 }

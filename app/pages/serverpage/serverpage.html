@@ -1,19 +1,24 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Lista Usuários (Banco)
+      Créditos
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="about">
-  <ion-list *ngIf = "data">
-    Users: <br>
-		<ion-item *ngFor="let d of data">
-      Nome: {{d.name}}, <br>
-      Sexo: {{d.gender}}, <br>
-      Curso: {{d.course}}, <br>
-      Periodo: {{d.period}}
-	  </ion-item>
-	</ion-list>
+  <div id="servepagediv" style='background-color:white' [style.width]='w' [style.height]='h'>
+    Disciplina: Tópicos Avançados em Rede de Computador I <br>
+    Turma: TS88 <br>
+    Professor: Antonio Luiz Cavalcanti <i> (TJ) </i> <br> <br>
+    Alunos: <br>
+      <ul>
+        <li> Eduardo Porto </li>
+        <li> Hildemir Regis </li>
+        <li> Henrique Dreyer</li>
+        <li>Gustavo</li>
+      </ul>
+      <br>
+      Jogo: Caça-Fantasmas vAlpha-Alpha-Alpha-NuncaVaiSairDoAlpha 0.1 <br>
+ </div>
 </ion-content>

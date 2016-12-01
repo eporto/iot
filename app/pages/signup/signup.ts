@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Http } from '@angular/http';
+import {GameService} from '../../providers/game-service/game-service';
 
 @Component({
-  templateUrl: 'build/pages/register/register.html',
+  templateUrl: 'build/pages/signup/signup.html'
 })
-export class RegisterPage {
+export class SignupPage {
   private user:any = {
       name: "" ,
       password: "",
@@ -17,7 +17,7 @@ export class RegisterPage {
     private submitted:boolean = false;
     private SignInErrors:Array<string> = [];
 
-    constructor(private navCtrl: NavController, private http:Http) {
+    constructor(private navCtrl: NavController, public gameService:GameService) {
 
     }
 
@@ -26,21 +26,15 @@ export class RegisterPage {
     if (this.SignInErrors.length > 0) {
       console.log(this.SignInErrors)
     } else {
-      //let url:string = "http://localhost:8080/app/register";
-       let url:string = 'https://iot-project.herokuapp.com/app/register';
-      let dataToSend:any = this.user; 
-
-    this.http.post(url,dataToSend).map(res => res.json())
-      .subscribe(data => {
-         this.navCtrl.pop();
-      }, error => {
-          console.log("Erro Post: "+error);
-    });
+        this.gameService.userSignup(this.user, (signup) => {
+          if(signup) 
+            this.navCtrl.pop();
+          else 
+            this.SignInErrors.push("Signup Failed");
+        });
     }
     
-    
-    
-  }
+}
 
   validateUser(form) {
     this.SignInErrors = [];
@@ -49,7 +43,6 @@ export class RegisterPage {
     if (form.gender.trim().length <=0) this.SignInErrors.push("Favor escolher um Sexo");
     if (form.course.trim().length <=0) this.SignInErrors.push("Favor escolher um Curso");
     if (form.password2.trim() !== form.password.trim()) this.SignInErrors.push("As senhas não batem");
-
   }
 }
 

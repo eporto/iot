@@ -1,31 +1,19 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Enviar Dados</ion-title>
+    <ion-title>Score</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="home">
-  <ion-item>
-    <ion-label floating> Nome </ion-label>
-    <ion-input (input) = "data.varString = $event.target.value"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating> Senha </ion-label>
-    <ion-input type = "text" (input) = "data.varNum = $event.target.value"></ion-input>
-  </ion-item>
-
-  <button block (click)="enviarDados()">Enviar</button>
-
-  <ion-card text-wrap>
-    <ion-card-header> Response from server </ion-card-header>
-    Dados a enviar: <br>
-    <span *ngIf = "data.varString.length > 0">?username={{data.varString}}</span>
-    <span *ngIf = "data.varNum.length > 0">&password={{data.varNum}} </span>
-    <hr>
-    <ion-card-content>
-      {{r}}
-    </ion-card-content>
-  </ion-card>
-
+<ion-content>
+<div id="gameoverdiv">
+  <ion-item-group *ngFor="let p of players">
+    <ion-item-divider color="light">{{p.id.name}}</ion-item-divider>
+    <ul *ngFor="let b of p.beacons">
+     <li> Beacon: {{b.id}} , Time: {{b.time}} </li>
+    </ul>
+  </ion-item-group>
+ </div>
+  <ion-footer>
+  <button block (click)="exit()">Sair</button>
+  </ion-footer>
 </ion-content>
